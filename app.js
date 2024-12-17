@@ -1,6 +1,6 @@
 //Simple Adventurer with basic Properties
 
-/** const adventurer = {
+ const adventurer = {
     name: "Robin",
     health: 10,
     inventory: ["sword", "potion", "artifact"],
@@ -44,7 +44,7 @@ console.log("\nHere is a list of your inventory:");
 for (let i = 0; i < adventurer.inventory.length; i++) {
     console.log(`${i + 1}. ${adventurer.inventory[i]}`);
 }
-*/
+
 
 
 //now we are using classes to re-create characters.  also, ensure they all share common methods and properties such as roll(). 
@@ -54,6 +54,14 @@ class Character {
         this.health = 100;
         this.inventory = [];
     }
+
+    roll (mod = 0) {
+        const result = 
+        Math.floor(Math.random() * 20) + 1 + mod;
+    
+        console.log(`${this.name} rolled a ${result}.`);
+    }
+
 }
 
 const robin = new Character("Robin");
@@ -65,3 +73,7 @@ robin.companion.type = "Cat";
 robin.companion.companion = new Character("Frank");
 robin.companion.companion.type = "Flea";
 robin.companion.companion.inventory = ["small hat", "sunglasses"];
+
+robin.roll();
+robin.companion.roll();
+robin.companion.companion.roll();
