@@ -4,6 +4,10 @@ const adventurer = {
     name: "Robin",
     health: 10,
     inventory: ["sword", "potion", "artifact"]
+    companion: {
+        name: "Leo",
+        type: "Cat"
+    }
 };
 
 //Accessing items in the inventory using dot notation and square bracket syntax
@@ -23,3 +27,4 @@ console.log("\nHere is a list of your inventory:");
 for (let i = 0; i < adventurer.inventory.length; i++) {
     console.log(`${i + 1}. ${adventurer.inventory[i]}`);
 }
+
