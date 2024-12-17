@@ -3,12 +3,29 @@
 const adventurer = {
     name: "Robin",
     health: 10,
-    inventory: ["sword", "potion", "artifact"]
+    inventory: ["sword", "potion", "artifact"],
     companion: {
         name: "Leo",
-        type: "Cat"
-    }
-};
+        type: "Cat",
+        companion: {
+            name: "Frank",
+            type: "Flea",
+            inventory: ["small hat", "sunglasses"]
+        }
+    },
+
+//method for dice roll.  mod is a modifying number, can be used in the call
+
+roll (mod = 0) {
+    const result = 
+    Math.floor(Math.random() * 20) + 1 + mod;
+
+    console.log(`${this.name} rolled a ${result}.`);
+}
+}
+adventurer.roll();
+adventurer.roll();
+adventurer.roll();
 
 //Accessing items in the inventory using dot notation and square bracket syntax
 console.log("Welcome, " + adventurer.name + "!");
