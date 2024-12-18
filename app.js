@@ -105,3 +105,45 @@ const ariana = new Adventurer("Ariana", "Ranger", "Stealth");
 console.log(ariana); //View Ariana's Properties
 ariana.scout();   //Call the scout method
 ariana.displaySkill();  //Call display skill method
+
+class Companion extends Character {
+    constructor(name, type, specialAbility) {
+        super(name); //Call the Character constructor to initialize basic properties
+        this.type = type; //Type of companion (e.g. cat, wolf, etc.)
+        this.specialAbility = specialAbility; //Unique ability of the companion
+        this.loyalty = 100; //Companions start with full loyalty by default
+    }
+    //Method for using the specical ability
+    useAbility() {
+        console.log(`${this.name} the ${this.type} uses ${this.specialAbility}!`);
+    } 
+    //Method for decreasing loyalty (e.g. due to neglect or poor treatment)
+    decreaseLoyalty(amount) {
+        this.loyalty = Math.max(0, this.loyalty - amount); //Loyalty can not go below 0
+        console.log(`${this.name}'s loyalty is now ${this.loyalty}.`);
+    }
+    //Method for increasing loyalty (e.g. due to care or bonding)
+    increaseLoyalty(amount) {
+        this.loyalty = Math.min(100, this.loyalty + amount);  // Loyalty maxes out at 100
+        console.log(`${this.name}'s loyalty is now ${this.loyalty}`);
+    }
+}
+
+const leo = new Companion("Leo", "Cat", "Keen Senses");
+const frank = new Companion("Frank", "Flea", "Tiny Escape");
+
+//add companions to Ariana
+ariana.companion = leo;
+leo.companion = frank; //Leo has his own companion, Frank
+
+//Test companion abilities and loyalty
+leo.useAbility();
+leo.decreaseLoyalty(20);
+leo.increaseLoyalty(15);
+
+frank.useAbility();
+
+//Display the adventurer details
+console.log(ariana);
+console.log(ariana.companion);
+console.log(ariana.companion.companion);
