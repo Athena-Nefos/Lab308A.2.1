@@ -77,3 +77,31 @@ robin.companion.companion.inventory = ["small hat", "sunglasses"];
 robin.roll();
 robin.companion.roll();
 robin.companion.companion.roll();
+
+class Adventurer extends Character {
+    constructor (name, role, skill) {
+        super(name);
+        //Adventurers have specialized roles.
+        this.role = role;
+        //Every adventurer starts with a bed and 50 gold coins
+        this.inventory.push("bedroll", "50 gold coins");
+        this.skillset = skill;
+    }
+    //Adventurers have the ability to scout ahead of them.
+    scout() {
+        console.log(`${this.name} is scouting ahead...`);    
+
+        super.roll();
+    }
+    displaySkill() {
+        console.log(`${this.name}'s skill set is: ${this.skillset}`);
+    } 
+    
+}
+
+const ariana = new Adventurer("Ariana", "Ranger", "Stealth");
+
+//Call methods to test Ariana
+console.log(ariana); //View Ariana's Properties
+ariana.scout();   //Call the scout method
+ariana.displaySkill();  //Call display skill method
