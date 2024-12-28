@@ -62,6 +62,11 @@ class Character {
         console.log(`${this.name} rolled a ${result}.`);
     }
         static MAX_HEALTH = 100; //static property on the class
+
+        static calculateDamage(attack, defense) {
+            const damage = Math.max(0, attack - damage);
+            return damage;
+        }
 }
 
 // const robin = new Character("Robin");
@@ -88,7 +93,8 @@ class Adventurer extends Character {
         //Adventurers have specialized roles.
         this.role = role;
         //Every adventurer starts with a bed and 50 gold coins
-        this.inventory.push("bedroll", "50 gold coins");
+        this.inventory = [...Adventurer.DEFAULT_INVENTORY]; 
+        //new static property for inventory
         this.skillset = skill;
     }
     //Adventurers have the ability to scout ahead of them.
@@ -101,6 +107,20 @@ class Adventurer extends Character {
         console.log(`${this.name}'s skill set is: ${this.skillset}`);
     } 
     static ROLES = ["Fighter", "Wizard", "Healer", "Ranger", "Warrior"]
+
+    static DEFAULT_INVENTORY = ["bedroll", "50 gold coins"] 
+    //static default inventory
+
+    static describeRole(role) {
+        const descriptions = {
+            Fighter: "A versatile warrior trained in the use of weapons and armor.",
+            Wizard: "A powerful spellcaster who weilds the forces of magic to shape reality.",
+            Healer: "A compassionate and dedicaed supporter who focuses on restoring health, curing ailments and protecting the party from harm.",
+            Ranger: "A wilderness expert with exceptional skills in archery, survival and tracking.",
+            Warrior: "A battle-hardened veteran who focuses on brute strength and mastery of physical combat.",
+        };
+        return descriptions[role] || "Unknown role";
+    }
 }
 console.log(Adventurer.ROLES);
 
@@ -181,4 +201,11 @@ frank.useAbility();
 //View the companion structure 
 console.log(robin.companion);
 console.log(robin.companion.companion);
+
+console.log(Character.MAX_HEALTH);
+console.log(Adventurer.ROLES);
+console.log(Adventurer.describeRole("Healer"));
+
+console.log(ariana);
+
 
