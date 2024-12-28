@@ -51,7 +51,7 @@
 class Character {
     constructor (name) {
         this.name = name;
-        this.health = 100;
+        this.health = Character.MAX_HEALTH; //use static property
         this.inventory = [];
     }
 
@@ -61,7 +61,7 @@ class Character {
     
         console.log(`${this.name} rolled a ${result}.`);
     }
-
+        static MAX_HEALTH = 100; //static property on the class
 }
 
 // const robin = new Character("Robin");
@@ -81,6 +81,10 @@ class Character {
 class Adventurer extends Character {
     constructor (name, role, skill) {
         super(name);
+        //Add ROLES ARRAY for Adventurers
+        if (!Adventurer.ROLES.includes(role)) {
+            throw new Error(`Invalid role: ${role}. Choose from: ${Adventurer.ROLES.join(", ")}`);
+        }
         //Adventurers have specialized roles.
         this.role = role;
         //Every adventurer starts with a bed and 50 gold coins
@@ -96,8 +100,9 @@ class Adventurer extends Character {
     displaySkill() {
         console.log(`${this.name}'s skill set is: ${this.skillset}`);
     } 
-    
+    static ROLES = ["Fighter", "Wizard", "Healer", "Ranger", "Warrior"]
 }
+console.log(Adventurer.ROLES);
 
 const ariana = new Adventurer("Ariana", "Ranger", "Stealth");
 
@@ -160,7 +165,7 @@ const frankie = new Companion("Frankie", "Flea", "Tiny Escape");
 
 //build companion hierarchy
 robin.companion = leoge;
-leo.companion = frank;
+leoge.companion = frankie;
 
 // Test functnionality
 console.log(robin);
