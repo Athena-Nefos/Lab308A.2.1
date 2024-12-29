@@ -97,6 +97,8 @@ class Adventurer extends Character {
         //new static property for inventory
         this.skillset = skill;
     }
+
+
     //Adventurers have the ability to scout ahead of them.
     scout() {
         console.log(`${this.name} is scouting ahead...`);    
@@ -106,6 +108,36 @@ class Adventurer extends Character {
     displaySkill() {
         console.log(`${this.name}'s skill set is: ${this.skillset}`);
     } 
+    duel(opponent) {
+        if (!(opponent instanceof Adventurer)) {
+            throw new Error("Opponent must be an instance of Adeventurer.");
+        }
+        console.log(`Duel initiated between ${this.name} and ${opponent.name}!`);
+
+        while (this.health > 50 && opponent.health > 50) {
+            //Each adventurer rolls
+            const myRoll = Math.floor(Math.random() * 20) + 1;
+            const opponentRoll = Math.floor(Math.random() * 20) + 1;
+
+            console.log(`${this.name} rolls ${myRoll} and ${opponent.name} rolls ${opponentRoll}.`);
+
+            //Deduct health from the one with the lower roll
+            if (myRoll > opponentRoll) {
+                opponent.health -= 1;
+                console.log(`${opponent.name} loses 1 health.  Current health: ${opponent.health}`);
+            } else if (opponentRoll > myRoll) {
+                this.health -= 1;
+                console.log(`${this.name} loses 1 health.  Current health: ${this.health}`);
+            } else {
+                console.log("It's a tie! No damage dealt this round.");
+            }
+        }
+
+        //Determine the winner
+        const winner = this.health > 50 ? this.name : opponent.name;
+        console.log(`${winner} wins the duel!`);
+    } 
+
     static ROLES = ["Fighter", "Wizard", "Healer", "Ranger", "Warrior"]
 
     static DEFAULT_INVENTORY = ["bedroll", "50 gold coins"] 
@@ -207,5 +239,11 @@ console.log(Adventurer.ROLES);
 console.log(Adventurer.describeRole("Healer"));
 
 console.log(ariana);
+
+const alice = new Adventurer("Alice", "Fighter", "Swordsmanship");
+const bob = new Adventurer("Bob", "Wizard", "Spellcasting");
+
+alice.duel(bob);
+
 
 
