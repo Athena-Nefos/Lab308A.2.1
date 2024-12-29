@@ -156,6 +156,38 @@ class Adventurer extends Character {
 }
 console.log(Adventurer.ROLES);
 
+class AdventurerFactory {
+    constructor(role) {
+        this.role = role; //shared property
+        this.adventurers = []; //store created adventurers
+    }
+
+    //Method to generate a new adventurer
+    generate(name) {
+        const newAdventurer = new Adventurer(name, this.role);
+        this.adventurers.push(newAdventurer);
+        return newAdventurer; //return the created adventurer
+    }
+
+    //find adventurer by index
+    findByIndex(index) {
+        return this.adventurers[index];
+    }
+
+    //FInd adventurer by name
+    findByName(name) {
+        return this.adventurers.find((a) => a.name === name);
+    }
+}
+
+const healers = new AdventurerFactory("Healer");
+
+const lobin = healers.generate("Lobin"); //create a healer named Lobin
+const lily = healers.generate("Lily"); //create another healer named Lily
+
+console.log(healers.findByIndex(0));
+console.log(healers.findByName("Lily"));
+
 const ariana = new Adventurer("Ariana", "Ranger", "Stealth");
 
 //Call methods to test Ariana
