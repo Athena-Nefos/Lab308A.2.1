@@ -64,7 +64,7 @@ class Character {
         static MAX_HEALTH = 100; //static property on the class
 
         static calculateDamage(attack, defense) {
-            const damage = Math.max(0, attack - damage);
+            const damage = Math.max(0, attack - defense);
             return damage;
         }
 }
@@ -177,6 +177,30 @@ class AdventurerFactory {
     //FInd adventurer by name
     findByName(name) {
         return this.adventurers.find((a) => a.name === name);
+    }
+    listAll() {
+        return this.adventurers.map((a) => a.name).join(", ");
+    }
+    removeByName(name) {
+        this.adventurers = this.adventurers.filter((a) => a.name !== name);
+    }
+}
+
+class Healer extends Adventurer {
+    constructor(name) {
+        super(name, "Healer");
+    }
+    heal(target) {
+        console.log(`${this.name} heals ${target.name}.`);
+        target.health += 10; //increase targets health
+    }
+}
+
+class HealerFactory extends AdventurerFactory {
+    generate(name) {
+        const newHealer = new Healer(name);
+        this.adventurers.push(newHealer);
+        return newHealer;
     }
 }
 
